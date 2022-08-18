@@ -15,9 +15,9 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="module-library" exported="">
-      <library name="mysql-connector-java-5.1.35.jar">
+      <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/mysql-connector-java-5.1.35.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/mysql-connector-java-8.0.28.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
