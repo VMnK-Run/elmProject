@@ -8,6 +8,10 @@ public class User {
     private String userImg;
     private Integer delTag;
 
+    public String getPassword() {
+        return password;
+    }
+
     public String getUserId() {
         return userId;
     }
