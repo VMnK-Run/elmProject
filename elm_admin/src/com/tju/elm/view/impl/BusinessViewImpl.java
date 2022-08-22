@@ -79,4 +79,110 @@ public class BusinessViewImpl implements BusinessView {
             }
         }
     }
+
+    @Override
+    public Business logIn() {
+        System.out.println("请输入商家编号：");
+        int businessId = input.nextInt();
+        System.out.println("请输入密码：");
+        String password = input.next();
+        BusinessDao businessDao = new BusinessDaoImpl();
+        return businessDao.getBusinessByIdByPassword(businessId, password);
+    }
+
+    @Override
+    public void showBusiness(Integer businessId) {
+        BusinessDao businessDao = new BusinessDaoImpl();
+        Business business = businessDao.getBusinessById(businessId);
+        System.out.println(business.toString());
+    }
+
+    @Override
+    public void editBusiness(Integer businessId) {
+        // 先显示原信息，再更新
+        BusinessDao businessDao = new BusinessDaoImpl();
+        Business business = businessDao.getBusinessById(businessId);
+        System.out.println(business.toString());
+
+        boolean changed = false;
+        String inputStr = "";
+        System.out.println("是否修改商家名称(y/n)?");
+        inputStr = input.next();
+        if(inputStr.equals("y")) {
+            changed = true;
+            System.out.println("请输入新的商家名称：");
+            inputStr = input.next();
+            business.setBusinessName(inputStr);
+        }
+
+        System.out.println("是否修改商家地址(y/n)?");
+        inputStr = input.next();
+        if(inputStr.equals("y")) {
+            changed = true;
+            System.out.println("请输入新的商家地址：");
+            business.setBusinessAddress(input.next());
+        }
+
+        System.out.println("是否修改商家介绍(y/n)?");
+        inputStr = input.next();
+        if(inputStr.equals("y")) {
+            changed = true;
+            System.out.println("请输入新的商家介绍：");
+            business.setBusinessExplain(input.next());
+        }
+
+        System.out.println("是否修改起送费(y/n)?");
+        inputStr = input.next();
+        if(inputStr.equals("y")) {
+            changed = true;
+            System.out.println("请输入新的起送费：");
+            business.setStartPrice(input.nextDouble());
+        }
+
+        System.out.println("是否修改配送费(y/n)?");
+        inputStr = input.next();
+        if(inputStr.equals("y")) {
+            changed = true;
+            System.out.println("请输入新的配送费：");
+            business.setDeliveryPrice(input.nextDouble());
+        }
+
+        int result = businessDao.updateBusiness(business);
+        if(result > 0) {
+            if(changed) {
+                System.out.println("修改商家信息成功！");
+            } else {
+                System.out.println("未进行修改！");
+            }
+
+        } else {
+            System.out.println("修改商家信息失败！");
+        }
+    }
+
+    @Override
+    public void updateBusinessByPassword(Integer businessId) {
+        BusinessDao businessDao = new BusinessDaoImpl();
+        Business business = businessDao.getBusinessById(businessId);
+
+        System.out.println("\n请输入原始密码：");
+        String oldPassword = input.next();
+        System.out.println("\n请输入新密码：");
+        String newPassword = input.next();
+        System.out.println("\n请再次输入密码：");
+        String beginPassword = input.next();
+
+        if(!oldPassword.equals(business.getPassword())) {
+            System.out.println("\n旧密码输入错误！");
+        } else if(!newPassword.equals(beginPassword)){
+            System.out.println("\n两次密码输入不一致！");
+        } else {
+            int result = businessDao.updatePassword(businessId, newPassword);
+            if(result > 0) {
+                System.out.println("\n密码修改成功！");
+            } else {
+                System.out.println("\n密码修改失败！");
+            }
+        }
+    }
 }

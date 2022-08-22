@@ -112,4 +112,107 @@ public class BusinessDaoImpl implements BusinessDao {
         }
         return res;
     }
+
+    @Override
+    public Business getBusinessByIdByPassword(Integer businessId, String password) {
+        Business business = null;
+        String sql = "select * from business where businessId=? and password=?";
+        try {
+            con = DBUtil.getConnection();
+            pst = con.prepareStatement(sql);// 预编译
+            pst.setInt(1, businessId); // 设置参数
+            pst.setString(2, password);
+            rs = pst.executeQuery();
+            while(rs.next()) {
+                // 把数据库中的数据封装到Business
+                // 数据库数据转为java对象
+                business = new Business();
+                business.setBusinessId(rs.getInt("businessId"));
+                business.setPassword(rs.getString("password"));
+                business.setBusinessName(rs.getString("businessName"));
+                business.setBusinessExplain(rs.getString("businessExplain"));
+                business.setBusinessAddress(rs.getString("businessAddress"));
+                business.setStartPrice(rs.getDouble("startPrice"));
+                business.setDeliveryPrice(rs.getDouble("deliveryPrice"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // 必须释放资源
+            DBUtil.closeConnection(rs, pst, con);
+        }
+        return business;
+    }
+
+    @Override
+    public Business getBusinessById(Integer businessID) {
+        Business business = null;
+        String sql = "select * from business where businessId=?";
+        try{
+            con = DBUtil.getConnection();
+            pst = con.prepareStatement(sql);
+            pst.setInt(1, businessID);
+            rs = pst.executeQuery();
+            while(rs.next()) {
+                business = new Business();
+                business.setBusinessId(rs.getInt("businessId"));
+                business.setPassword(rs.getString("password"));
+                business.setBusinessName(rs.getString("businessName"));
+                business.setBusinessExplain(rs.getString("businessExplain"));
+                business.setBusinessAddress(rs.getString("businessAddress"));
+                business.setStartPrice(rs.getDouble("startPrice"));
+                business.setDeliveryPrice(rs.getDouble("deliveryPrice"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.closeConnection(rs, pst, con);
+        }
+
+        return business;
+    }
+
+    @Override
+    public int updateBusiness(Business business) {
+        int res = 0;
+        String sql = "update business set businessName=?, businessAddress=?, businessExplain=?, startPrice=?, deliveryPrice=? where businessId=?";
+        try {
+            con = DBUtil.getConnection();
+            pst = con.prepareStatement(sql);
+            pst.setString(1, business.getBusinessName());
+            pst.setString(2, business.getBusinessAddress());
+            pst.setString(3, business.getBusinessExplain());
+            pst.setDouble(4, business.getStartPrice());
+            pst.setDouble(5, business.getDeliveryPrice());
+            pst.setInt(6, business.getBusinessId());
+            res = pst.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // 必须释放资源
+            DBUtil.closeConnection(null, pst, con);
+        }
+        return res;
+    }
+
+    @Override
+    public int updatePassword(Integer businessID, String password) {
+        int res = 0;
+        String sql = "update business set password=? where businessId=?";
+        try {
+            con = DBUtil.getConnection();
+            pst = con.prepareStatement(sql);
+            pst.setString(1, password);
+            pst.setInt(2, businessID);
+            res = pst.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // 必须释放资源
+            DBUtil.closeConnection(null, pst, con);
+        }
+        return res;
+    }
 }
