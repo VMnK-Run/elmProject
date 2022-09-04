@@ -1,19 +1,34 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Index from '../views/Index.vue'
+import BusinessList from "@/views/BusinessList";
+import BusinessInfo from "@/views/BusinessInfo";
+import Login from "@/views/Login";
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'index',
+    name: 'Home',
     component: Index
   }, {
     path: '/index',
-    name: 'index',
+    name: 'Index',
     component: Index
-  },
+  }, {
+    path: '/businessList',
+    name: 'BusinessList',
+    component : BusinessList
+  }, {
+    path: '/businessInfo',
+    name: 'BusinessInfo',
+    component: BusinessInfo
+  }, {
+    path: '/login',
+    name: 'Login',
+    component: Login
+  }
 ]
 
 //解决重复路由报异常问题
