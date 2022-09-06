@@ -16,7 +16,28 @@ public class DeliveryAddressController {
     private DeliveryAddressService deliveryAddressService;
 
     @RequestMapping("/listDeliveryAddressByUserId")
-    public List<DeliveryAddress> listDeliveryAddressByUserId(DeliveryAddress deliveryAddress){
+    public List<DeliveryAddress> listDeliveryAddressByUserId(DeliveryAddress deliveryAddress) throws Exception{
         return deliveryAddressService.listDeliveryAddressByUserId(deliveryAddress.getUserId());
     }
+
+    @RequestMapping("/getDeliveryAddressById")
+    public DeliveryAddress getDeliveryAddressById(DeliveryAddress deliveryAddress) throws Exception{
+        return deliveryAddressService.getDeliveryAddressById(deliveryAddress.getDaId());
+    }
+
+    @RequestMapping("/saveDeliveryAddress")
+    public int saveDeliveryAddress(DeliveryAddress deliveryAddress) throws Exception {
+        return deliveryAddressService.saveDeliveryAddress(deliveryAddress);
+    }
+
+    @RequestMapping("/updateDeliveryAddress")
+    public int updateDeliveryAddress(DeliveryAddress deliveryAddress) throws Exception {
+        return deliveryAddressService.updateDeliveryAddress(deliveryAddress);
+    }
+
+    @RequestMapping("/removeDeliveryAddress")
+    public int removeDeliveryAddress(DeliveryAddress deliveryAddress) throws Exception {
+        return deliveryAddressService.removeDeliveryAddress(deliveryAddress.getDaId());
+    }
+
 }

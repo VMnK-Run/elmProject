@@ -56,4 +56,14 @@ public class OrdersServiceImpl implements OrdersService {
 
         return orderId;
     }
+
+    @Override
+    public Orders getOrdersById(Integer orderID) {
+        return ordersMapper.getOrdersById(orderID);
+    }
+
+    @Override
+    public List<Orders> listOrdersByUserId(String userId) {
+        return ordersMapper.listOrdersByUserId(userId);
+    }
 }
