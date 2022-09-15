@@ -5,7 +5,7 @@
 <mapper namespace="com.tju.elmboot.mapper.OrderDetailetMapper">
 
     <insert id="saveOrderDetailetBatch" parameterType="com.tju.elmboot.po.OrderDetailet">
-        insert into orderdetailet(orderId, foodId, quantity) values
+        insert into orderdetailet(orderId,foodId,quantity) values
         <foreach collection="list" item="od" separator=",">
             (#{od.orderId},#{od.foodId},#{od.quantity})
         </foreach>

@@ -49,7 +49,9 @@ public class OrdersServiceImpl implements OrdersService {
             od.setQuantity(c.getQuantity());
             list.add(od);
         }
-        orderDetailetMapper.saveOrderDetailetBatch(list);
+        if(!list.isEmpty()) {
+            orderDetailetMapper.saveOrderDetailetBatch(list);
+        }
 
         //4、从购物车表中删除相关食品信息
         cartMapper.removeCart(cart);

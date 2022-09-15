@@ -14,7 +14,7 @@
         <result column="orderState" property="orderState"/>
 
         <association property="business" javaType="com.tju.elmboot.po.Business"
-                select="com.tju.elmboot.mapper.OrderDetailetMapper.listOrderDetailetByOrderId" column="businessId"/>
+                select="com.tju.elmboot.mapper.BusinessMapper.getBusinessById" column="businessId"/>
 
         <collection property="list" ofType="com.tju.elmboot.po.OrderDetailet"
                 select="com.tju.elmboot.mapper.OrderDetailetMapper.listOrderDetailetByOrderId" column="orderId"/>

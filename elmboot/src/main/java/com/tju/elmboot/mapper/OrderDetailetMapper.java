@@ -2,7 +2,6 @@ package com.tju.elmboot.mapper;
 
 import com.tju.elmboot.po.OrderDetailet;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
